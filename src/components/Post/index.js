@@ -10,9 +10,10 @@ const Post = ({ showModal }) => {
   const [thumbnailUrl, setThumbnailUrl] = useState("");
 
   const urlYoutube = `https://www.youtube.com/watch?v=${idVideo}`;
+  const videoUrl = `https://www.youtube.com/embed/${idVideo}`;
 
   const fetchThumbnail = () => {
-    const thumbnailUrl = `https://www.youtube.com/embed/${idVideo}`;
+    const thumbnailUrl = `https://img.youtube.com/vi/${idVideo}/hqdefault.jpg`;
     setThumbnailUrl(thumbnailUrl);
   };
 
@@ -47,11 +48,11 @@ const Post = ({ showModal }) => {
   return (
     <div className="grid grid-cols-1 mt-[40px] lg:grid-cols-3 ">
       <div className="rounded-tl-[20px] rounded-bl-[20px] bg-white ml-[10px] h-full">
-        <iframe
+        <img
           className="h-[35rem] my-5 w-[90%] mx-3 rounded-[20px] object-contain"
           src={thumbnailUrl}
           allowFullScreen={true}
-        ></iframe>
+        ></img>
       </div>
       <div className="w-full bg-white rounded-tr-[20px] rounded-br-[20px]">
         <div className="flex items-center my-5 mx-3">
