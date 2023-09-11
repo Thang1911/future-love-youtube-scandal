@@ -48,11 +48,12 @@ const Post = ({ showModal }) => {
   return (
     <div className="grid grid-cols-1 mt-[40px] lg:grid-cols-3 ">
       <div className="rounded-tl-[20px] rounded-bl-[20px] bg-white ml-[10px] h-full">
-        <img
+        <iframe
           className="h-[35rem] my-5 w-[90%] mx-3 rounded-[20px] object-contain"
           src={thumbnailUrl}
           allowFullScreen={true}
-        ></img>
+          onClick={() => setThumbnailUrl(videoUrl)}
+        ></iframe>
       </div>
       <div className="w-full bg-white rounded-tr-[20px] rounded-br-[20px]">
         <div className="flex items-center my-5 mx-3">
