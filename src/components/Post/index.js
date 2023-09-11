@@ -7,15 +7,11 @@ import { useParams } from "react-router-dom";
 const Post = ({ showModal }) => {
   const { idVideo } = useParams();
   const [radomEvent, setRandomEvent] = useState({});
-  const [thumbnailUrl, setThumbnailUrl] = useState("");
+  const [showThumbnail, setShowThumbnail] = useState(true);
 
-  const urlYoutube = `https://www.youtube.com/watch?v=${idVideo}`;
-  const videoUrl = `https://www.youtube.com/embed/${idVideo}`;
-
-  const fetchThumbnail = () => {
-    const thumbnailUrl = `https://img.youtube.com/vi/${idVideo}/hqdefault.jpg`;
-    setThumbnailUrl(thumbnailUrl);
-  };
+   const toggleDisplay = () => {
+     setShowThumbnail(!showThumbnail);
+   };
 
   useEffect(() => {
     async function fetchData() {
@@ -35,8 +31,6 @@ const Post = ({ showModal }) => {
         const randomIndex = Math.floor(Math.random() * shuffledData.length);
         const selectedData = shuffledData[randomIndex];
 
-        fetchThumbnail();
-
         setRandomEvent(selectedData);
       } catch (error) {
         console.error("Error fetching JSON data:", error);
@@ -48,12 +42,21 @@ const Post = ({ showModal }) => {
   return (
     <div className="grid grid-cols-1 mt-[40px] lg:grid-cols-3 ">
       <div className="rounded-tl-[20px] rounded-bl-[20px] bg-white ml-[10px] h-full">
-        <iframe
-          className="h-[35rem] my-5 w-[90%] mx-3 rounded-[20px] object-contain"
-          src={thumbnailUrl}
-          allowFullScreen={true}
-          onClick={() => setThumbnailUrl(videoUrl)}
-        ></iframe>
+        {showThumbnail ? (
+          <img
+            className="h-[35rem] my-5 w-[90%] mx-3 rounded-[20px] object-contain"
+            src={`https://img.youtube.com/vi/${idVideo}/hqdefault.jpg`}
+            alt="Thumbnail"
+            onClick={toggleDisplay}
+          />
+        ) : (
+          <iframe
+            className="h-[35rem] my-5 w-[90%] mx-3 rounded-[20px] object-contain"
+            src={`https://www.youtube.com/embed/${idVideo}?autoplay=1`}
+            allowFullScreen={true}
+            allow="autoplay"
+          ></iframe>
+        )}
       </div>
       <div className="w-full bg-white rounded-tr-[20px] rounded-br-[20px]">
         <div className="flex items-center my-5 mx-3">
